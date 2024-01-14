@@ -13,7 +13,14 @@ export const config = {
 
 export default (req, res) => {
 	return new Promise((resolve, reject) => {
-		proxy.web(req, res, { target: API_URL, changeOrigin: true }, (err) => {
+		proxy.web(req, res, {
+			target: API_URL,
+			ws: true,
+			changeOrigin: true,
+			headers: {
+				Accept: "application/json"
+			}
+		}, (err) => {
 			if (err) {
 				return reject(err)
 			}
